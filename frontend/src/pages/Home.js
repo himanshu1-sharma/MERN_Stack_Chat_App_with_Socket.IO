@@ -1,8 +1,11 @@
 import React from 'react'
+import Navigation from './Includes/Navigation'
 
 const Home = () => {
     return (
-        <div>Home</div>
+        <>
+            <Navigation />
+        </>
     )
 }
 
