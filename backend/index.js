@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const { DB_CONNECT } = process.env;
 var router = express()
 
+const UserRouter = require("./routes/User.routes")
+
 
 app.use(express.json())
 app.use(cors())
@@ -26,6 +28,7 @@ db.on("error", (err) => console.log(err));
 //routes
 
 router.use(bodyParser.json())
+app.use("/api/user", UserRouter)
 
 app.get('/', (req, res) => {
     res.send("api is running")
