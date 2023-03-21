@@ -27,8 +27,8 @@ exports.registerUser = async (req, res) => {
         })
 
         user = await user.save()
-        return res.status(403).json({
-            errorcode: 2,
+        return res.status(200).json({
+            errorcode: 0,
             status: false,
             message: "Registered Successfully",
             data: user
