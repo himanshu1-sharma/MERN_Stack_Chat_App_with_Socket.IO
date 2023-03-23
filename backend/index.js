@@ -7,7 +7,8 @@ const mongoose = require("mongoose");
 const { DB_CONNECT } = process.env;
 var router = express()
 
-const UserRouter = require("./routes/User.routes")
+const UserRouter = require("./routes/User.routes");
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 
 app.use(express.json())
@@ -33,6 +34,20 @@ app.use("/api/user", UserRouter)
 app.get('/', (req, res) => {
     res.send("api is running")
 })
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    if (req.method === "OPTIONS") {
+        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+        return res.status(200).json({});
+    }
+    next();
+});
+
+//Error Handling Middlewares
+app.use(notFound);
+app.use(errorHandler);
 
 let PORT = process.env.PORT || 6050;
 
