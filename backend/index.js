@@ -8,6 +8,7 @@ const { DB_CONNECT } = process.env;
 var router = express()
 
 const UserRouter = require("./routes/User.routes");
+const ChatRouter = require("./routes/Chat.routes")
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 
@@ -30,6 +31,8 @@ db.on("error", (err) => console.log(err));
 
 router.use(bodyParser.json())
 app.use("/api/user", UserRouter)
+app.use("/api/chat", ChatRouter)
+
 
 app.get('/', (req, res) => {
     res.send("api is running")
